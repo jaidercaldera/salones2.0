@@ -1,8 +1,8 @@
+const { Schema, model } = require("mongoose");
 const SalonSchema = new Schema(
   {
-    salon: { type: String, required: true, trim: true },
-    Bloque: { type: mongoose.Schema.Types.ObjectId, ref: "Bloque" },
-    sensores: { type: Array, required: false },
+    salon: { type: String, required: true, trim: true }
+    //sensores: { type: Array, required: false },
   },
   {
     timestamps: true,

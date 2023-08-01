@@ -5,7 +5,7 @@ dashBoardCtrl.viewDashBoard = (req, res) => {
 };
 
 dashBoardCtrl.viewBloques = (req, res) => {
-  res.send("Salones");
+  res.render("./admin/salones");
 };
 
 dashBoardCtrl.viewControl = (req, res) => {
