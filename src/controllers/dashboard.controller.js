@@ -4,12 +4,10 @@ dashBoardCtrl.viewDashBoard = (req, res) => {
   res.render("dashboard");
 };
 
-dashBoardCtrl.viewBloques = (req, res) => {
-  res.render("./admin/salones");
-};
+
 
 dashBoardCtrl.viewControl = (req, res) => {
-  res.send("Control");
+  res.send("control");
 };
 
 dashBoardCtrl.viewHorario = (req, res) => {
@@ -19,5 +17,6 @@ dashBoardCtrl.viewHorario = (req, res) => {
 dashBoardCtrl.viewSensores = (req, res) => {
   res.send("Sensores");
 };
+
 
 module.exports = dashBoardCtrl;

@@ -13,7 +13,6 @@ indexCtrl.singUp = (req,res) =>{
 };
 indexCtrl.register = async (req,res) =>{
   const{name, email, password} = req.body;
-  console.log(password,name)
   try {
     const passwordHash= await bcrypt.hash(password,10);
     const newUser = new Users({
