@@ -14,7 +14,7 @@ router.get("/Bloques", viewBloques);
 router.get("/Horarios", viewHorario);
 router.get("/Control", viewControl);
 router.get("/Sensores", viewSensores);
-router.get("/Bloques/Salones", viewSalones );
+router.get("/Bloques/Salones/bloque:bloque", viewSalones );
 router.get("/addBloque", addBloque)
 //peticiones post
 router.post("/createBloque", CreateBloque);

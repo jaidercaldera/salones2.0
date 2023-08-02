@@ -1,3 +1,4 @@
+const { model } = require("mongoose");
 const Bloque= require("../models/Bloque");
 const Salon= require("../models/Salon");
 const bloque_salonesCTRL= {};
@@ -45,7 +46,21 @@ bloque_salonesCTRL.viewBloques = async (req, res) => {
     
   };
 
-bloque_salonesCTRL.viewSalones = (req,res)=>{
-    res.render("./admin/salones")
+bloque_salonesCTRL.viewSalones =async (req,res)=>{
+    
+    try {
+        const bloque= req.params.bloque;
+        const bloqueformat= bloque.substring(1);
+        console.log(bloqueformat);
+        const modelBloque =await Bloque.findOne({bloque: bloqueformat});
+        const Salones= modelBloque.salones;
+        console.log(Salones);
+        const SalonesEncontrados= await Salon.find({_id : {$in : Salones}}).lean().exec()
+        console.log(SalonesEncontrados)
+        res.render("./admin/salones", {SalonesEncontrados});
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 module.exports = bloque_salonesCTRL;
