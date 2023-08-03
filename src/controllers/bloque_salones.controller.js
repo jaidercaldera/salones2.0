@@ -17,15 +17,17 @@ bloque_salonesCTRL.CreateBloque = async (req,res) =>{
 };
 
 bloque_salonesCTRL.createSalon = async (req,res) =>{
+    const {bloque}= req.cookies
+    console.log(bloque);
     try {
-        const{salon, bloque} = req.body;
+        const{salon, horarioNuevo} = req.body;
         const bloqueREF= await Bloque.findOne({bloque : bloque});
-        const nuevoSalon = await Salon.create({salon,bloque});
+        const nuevoSalon = await Salon.create({salon,bloque, horario: horarioNuevo});
         await Bloque.findByIdAndUpdate(bloqueREF._id,{$push: { salones: nuevoSalon._id}});
         console.log(nuevoSalon.salon);
-        res.redirect("/IndexBoard");
+        res.redirect("/Bloques");
     } catch (error) {
-        console.log("Error");
+        console.log(error);
     }
 };
 
@@ -33,7 +35,24 @@ bloque_salonesCTRL.addBloque =(req,res)=>{
     res.render("./admin/addBloque");
 };
 
+bloque_salonesCTRL.addSalon =  (req,res) =>{
+    const horarioVacio=[]
+        for(let hora = 6; hora<= 20; hora++){
+                const fila={
+                    hora: hora + ':00',
+                    lunes: '',
+                    martes: '',
+                    miercoles: '',
+                    jueves: '',
+                    viernes: '',
+                    sabado: ''
+                };
+            horarioVacio.push(fila);
+        };
+    res.render("./admin/addSalon", {horarioVacio});
+};
 bloque_salonesCTRL.viewBloques = async (req, res) => {
+    res.cookie("bloque", "");
     try {
         const bloquesEncontrados = await Bloque.find({}).lean().exec();
         console.log(bloquesEncontrados[0].bloque);
@@ -48,9 +67,11 @@ bloque_salonesCTRL.viewBloques = async (req, res) => {
 
 bloque_salonesCTRL.viewSalones =async (req,res)=>{
     
+    
     try {
         const bloque= req.params.bloque;
         const bloqueformat= bloque.substring(1);
+        res.cookie("bloque", bloqueformat);
         console.log(bloqueformat);
         const modelBloque =await Bloque.findOne({bloque: bloqueformat});
         const Salones= modelBloque.salones;
@@ -63,4 +84,6 @@ bloque_salonesCTRL.viewSalones =async (req,res)=>{
     }
     
 };
+
+
 module.exports = bloque_salonesCTRL;

@@ -1,6 +1,7 @@
 const dashBoardCtrl = {};
 
 dashBoardCtrl.viewDashBoard = (req, res) => {
+  res.cookie("bloque", "");
   res.render("dashboard");
 };
 

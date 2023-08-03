@@ -4,10 +4,14 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
+const CPS = require("cookie-parser")
 //import indexRoutes from "./routes/index.routes";
 
 //Declarando la contante que contiene nuestro servidor
 const app = express();
+
+app.use(CPS());
+
 //Estableciendo el uso de cors
 app.use(cors());
 // Analizar solicitudes con datos de formularios codificados en la URL

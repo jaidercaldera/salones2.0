@@ -1,13 +1,10 @@
 <body class="g-sidenav-show   bg-gray-100">
     {{>sidebar}}
     <main class="main-content position-relative border-radius-lg ">
-        {{> navbar}}  
-        <form action="/createSalon" method="post">
-            <input type="text" name="salon" id="" placeholder="Salon">
-            <button type="submit">Enviar</button>
-            <table>
+        {{> navbar}}
+        <table>
             <thead>
-              <tr>
+            <tr>
                 <th style="color: antiquewhite;">Hora</th>
                 <th style="color: antiquewhite;">Lunes</th>
                 <th style="color: antiquewhite;">Martes</th>
@@ -15,19 +12,23 @@
                 <th style="color: antiquewhite;">Jueves</th>
                 <th style="color: antiquewhite;">Viernes</th>
                 <th style="color: antiquewhite;">Sábado</th>
-              </tr>
+            </tr>
             </thead>
             <tbody>
-              {{#each horarioVacio}}
+            {{#each horario}}
                 <tr>
-                  {{#each this}}
-                    <td><input type="text" name="horarioNuevo[{{@../index}}][{{@index}}]" value="{{this}}"></td>
-                  {{/each}}
+                {{#each this}}
+                    <td><input type="text" "  value="{{this}}"></td>
+                {{/each}}
                 </tr>
-              {{/each}}
+            {{/each}}
             </tbody>
-          </table>
+        </table>
+        <form action="/Salon/Update" method="post">
+            <button type="submit">Actualizar</button>
         </form>
+       
     </main>
+    
 
 </body>
